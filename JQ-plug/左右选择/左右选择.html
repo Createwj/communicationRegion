@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	  <select multiple="multiple" id="select1" style="display: block; width:150px;height:200px; padding:4px; ">
+	   <option class="q" value="${_o.userId}">123</option>
+	   <option value="${_o.userId}">123</option>
+	   <option value="${_o.userId}">123</option>
+     </select>
+         <span id="add">
+                                                        <input type="button" class="btn" style="width: 34px;height: 25px" value=">">
+                                               </span><br>
+                                   <span id="add_all" style="margin-top: .5rem">
+                                                        <input  style="margin-top: .5rem;width: 34px;height: 25px" type="button" class="btn" value=">>">
+                                                </span> <br>
+                                   <span id="remove" style="margin-top: .5rem">
+                                                        <input  style="margin-top: .5rem;width: 34px;height: 25px" type="button" class="btn" value="<">
+                                               </span><br>
+                                   <span id="remove_all" style="margin-top: .5rem">
+                                                         <input  style="margin-top: .5rem;width: 34px;height: 25px" type="button" class="btn" value="<<">
+                                               </span>
+	<select multiple="multiple" id="select2" style="display: block;width: 150px;height:200px; padding:4px;">
+    </select>
+    <script src="./jquery-2.2.2.min.js"></script>
+	<script>
+
+  $('#add').click(function() {
+            $('#select1 option.q:selected').appendTo('#select2');
+        });
+        $('#remove').click(function() {
+            $('#select2 option:selected').appendTo('#select1');
+        });
+        $('#add_all').click(function() {
+            $('#select1 option').appendTo('#select2');
+        });
+        $('#remove_all').click(function() {
+            $('#select2 option').appendTo('#select1');
+        });
+        $('#select1').dblclick(function(){
+            $("option.q:selected",this).appendTo('#select2');
+        });
+        $('#select2').dblclick(function(){
+            $("option:selected",this).appendTo('#select1');
+             $("#select2").trigger("change",function(){
+             	console.log(this);
+             });
+        })
+        </script>
+</body>
+</html>

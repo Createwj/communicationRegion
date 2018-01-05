@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./jquery-2.2.2.min.js"></script>
+</head>
+<body>
+	
+	<select id="mySelect" multiple="multiple">  
+　　	<option value="1">one</option>  
+　　	<option value="2" selected="selected">two</option>  
+　　	<option value="3">three</option>  
+	</select>
+
+
+	<script>
+　　$(document).ready(function(){  
+　　　　$('#mySelect').change(function(){  
+　　　　　　console.log(this); 
+　　　　})  
+})  
+	</script>
+</body>
+</html>

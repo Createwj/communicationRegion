@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://www.jq22.com/demo/paging-master20160927/#page=9 -->
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>分页</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+		<link rel="stylesheet" type="text/css" href="./paging.css">
+	<script type="text/javascript" src="./jquery-1.11.2.js"></script>
+	<script type="text/javascript" src="./query.js"></script>
+	<script type="text/javascript" src="./paging.js"></script>
+	</head>
+	<body>
+		<div id="pageTool">
+			<!--<div id="Paging_004695494839177239" class="ui-paging-container">-->
+				<!--<ul>-->
+					<!--<li class="js-page-first js-page-action ui-pager ui-pager-disabled">首页</li>-->
+					<!--<li class="js-page-prev js-page-action ui-pager ui-pager-disabled">上一页</li>-->
+					<!--<li data-page="1" class="ui-pager focus">1</li>-->
+					<!--<li data-page="2" class="ui-pager">2</li>-->
+					<!--<li data-page="3" class="ui-pager">3</li>-->
+					<!--<li class="ui-paging-ellipse">...</li>-->
+					<!--<li data-page="10" class="ui-pager">10</li>-->
+					<!--<li class="js-page-next js-page-action ui-pager">下一页</li>-->
+					<!--<li class="js-page-last js-page-action ui-pager">末页</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+		</div>
+
+		<div id="pageToolbar">
+			<!--<div id="Paging_042201897938763366" class="ui-paging-container">-->
+				<!--<ul>-->
+					<!--<li class="js-page-first js-page-action ui-pager">首页</li>-->
+					<!--<li class="js-page-prev js-page-action ui-pager">上一页</li>-->
+					<!--<li data-page="1" class="ui-pager">1</li><li class="ui-paging-ellipse">...</li>-->
+					<!--<li data-page="7" class="ui-pager">7</li><li data-page="8" class="ui-pager">8</li>-->
+					<!--<li data-page="9" class="ui-pager focus">9</li>-->
+					<!--<li class="js-page-next js-page-action ui-pager ui-pager-disabled">下一页</li>-->
+					<!--<li class="js-page-last js-page-action ui-pager ui-pager-disabled">末页</li>-->
+					<!--<li class="ui-paging-toolbar">-->
+						<!--<select class="ui-select-pagesize">-->
+							<!--<option value="5">5条/页</option>-->
+							<!--<option value="10">10条/页</option>-->
+							<!--<option value="15">15条/页</option>-->
+							<!--<option value="20">20条/页</option>-->
+						<!--</select>-->
+						<!--<input type="text" class="ui-paging-count">-->
+						<!--<a href="javascript:void(0)">跳转</a>-->
+					<!--</li>-->
+				<!--</ul>-->
+			<!--</div>-->
+		</div>
+
+		<script>
+		$('#pageTool').Paging({
+			 pagesize:10,
+			 count:100,
+			 callback:function(page,size,count){
+			      //当前页码   每页显示数量   总页数
+			       console.log(page,size,count);
+			        console.log(arguments);
+			}});
+		$('#pageToolbar').Paging({
+			 pagesize:10,
+			 count:85,
+			 toolbar:true
+		});
+		</script>
+	
+</body></html>

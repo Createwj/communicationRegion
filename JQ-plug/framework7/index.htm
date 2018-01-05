@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Framework7 iOS</title>
+    <link rel="stylesheet" href="css/framework7.ios.css">
+    <link rel="stylesheet" href="css/framework7.ios.colors.css">
+    <link rel="stylesheet" href="css/framework7-icons.css">
+    <link rel="stylesheet" href="css/kitchen-sink.css">
+    <link rel="icon" href="img/icon.png">
+    <link rel="apple-touch-icon" href="img/icon.png">
+  </head>
+  <body>
+<!-- 左侧边栏开始 -->
+    <div class="statusbar-overlay"></div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-left panel-reveal layout-dark">
+      <div class="content-block-title">标题</div>
+      <div class="content-block">
+        <p>内容</p>
+      </div>
+      <div class="content-block-title">Framework7</div>
+      <div class="list-block">
+        <ul>
+          <li><a href="about.htm" class="item-link close-panel"> 
+              <div class="item-content">
+                <div class="item-media"><i class="icon icon-f7"></i></div>
+                <div class="item-inner"> 
+                  <div class="item-title">关于</div>
+                </div>
+              </div></a></li>
+        </ul>
+      </div>
+      <div class="content-block">
+     
+      </div>
+    </div>
+<!-- 左侧边栏结束 -->
+
+    <!-- 主页页面页面 -->
+    <div class="views">
+      <div class="view view-main">
+      <!-- 主页面头部 -->
+        <div class="navbar navbar-hidden">
+          <div class="navbar-inner">
+            <div class="left"></div>
+            <div class="center sliding">Framework7</div>
+            <div class="right"><a href="#" class="open-panel link icon-only"><i class="icon icon-bars"></i></a></div>
+          </div>
+        </div>
+        <!-- 主页面底部 -->
+        <div class="toolbar toolbar-hidden">
+          <div class="toolbar-inner"><a href="#" class="link">Dummy Link</a><a href="#" data-popover=".popover-menu" class="open-popover link">Menu</a></div>
+        </div>
+        <!-- 主页面显示区域 -->
+        <div class="pages navbar-through toolbar-through">
+         <!-- 显示 当前页面主要信息 -->
+          <div data-page="index" class="page no-navbar no-toolbar">
+            <div class="page-content">
+             <!-- 默认上下边距35px list-block -->
+              <div class="list-block">
+                <ul>
+                  <li><a href="选项卡.htm" class="item-link"> 
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner"> 
+                          <div class="item-title">选项卡</div>
+                        </div>
+                      </div></a></li>
+                  <li>
+                    <a href="about.htm" class="item-link"> 
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner"> 
+                          <div class="item-title">关于</div>
+                        </div>
+                      </div>
+                     </a>
+                  </li>
+                  <li>
+                    <a href="swiper_delete.htm" class="item-link"> 
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner"> 
+                          <div class="item-title">左拉删除</div>
+                        </div>
+                      </div>
+                     </a>
+                  </li>
+                   <li>
+                    <a href="隐藏页头.htm" class="item-link"> 
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner"> 
+                          <div class="item-title">隐藏页头</div>
+                        </div>
+                      </div>
+                     </a>
+                  </li>
+                    <li>
+                    <a href="logging.htm" class="item-link"> 
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner"> 
+                          <div class="item-title">登录页面</div>
+                        </div>
+                      </div>
+                     </a>
+                  </li>
+                   <li>
+                    <a href="message.htm" class="item-link"> 
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner"> 
+                          <div class="item-title">对话页面</div>
+                        </div>
+                      </div>
+                     </a>
+                  </li>
+                   <li>
+                    <a href="pull-down.htm" class="item-link"> 
+                      <div class="item-content">
+                        <div class="item-media"><i class="icon icon-f7"></i></div>
+                        <div class="item-inner"> 
+                          <div class="item-title">下拉刷新页面</div>
+                        </div>
+                      </div>
+                     </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!-- 点击请求以后 插入到当前位置 -->
+        </div>
+      </div>
+    </div>
+    <div class="popup demo-popup">
+      <div class="view navbar-fixed">
+        <div class="pages">
+          <div class="page">
+            <div class="navbar">
+              <div class="navbar-inner">
+                <div class="center">Popup Title</div>
+                <div class="right"><a href="#" class="link close-popup">Done</a></div>
+              </div>
+            </div>
+            <div class="page-content">
+              <div class="content-block">
+                <p>Here comes popup. You can put here anything, even independent view with its own navigation. Also not, that by default popup looks a bit different on iPhone/iPod and iPad, on iPhone it is fullscreen.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse faucibus mauris leo, eu bibendum neque congue non. Ut leo mauris, eleifend eu commodo a, egestas ac urna. Maecenas in lacus faucibus, viverra ipsum pulvinar, molestie arcu. Etiam lacinia venenatis dignissim. Suspendisse non nisl semper tellus malesuada suscipit eu et eros. Nulla eu enim quis quam elementum vulputate. Mauris ornare consequat nunc viverra pellentesque. Aenean semper eu massa sit amet aliquam. Integer et neque sed libero mollis elementum at vitae ligula. Vestibulum pharetra sed libero sed porttitor. Suspendisse a faucibus lectus.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="popover popover-menu">
+      <div class="popover-angle"></div>
+      <div class="popover-inner">
+        <div class="list-block">
+          <ul>
+            <li><a href="modals.html" class="list-button item-link">Modals</a></li>
+            <li><a href="popover.html" class="list-button item-link">Popover</a></li>
+            <li><a href="tabs.html" class="list-button item-link">Tabs</a></li>
+            <li><a href="panels.html" class="list-button item-link">Side Panels</a></li>
+            <li><a href="list-view.html" class="list-button item-link">List View</a></li>
+            <li><a href="forms.html" class="list-button item-link">Forms</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="popover popover-music">
+      <div class="popover-angle"></div>
+      <div class="popover-inner">
+        <div class="list-block media-list">
+          <ul>
+            <li><a href="#" class="item-link item-content">
+                <div class="item-media"><img src="http://lorempixel.com/88/88/people/1" width="44"></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">Yellow Submarine</div>
+                  </div>
+                  <div class="item-subtitle">Beatles</div>
+                </div></a></li>
+            <li><a href="#" class="item-link item-content">
+                <div class="item-media"><img src="http://lorempixel.com/88/88/people/2" width="44"></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">Don't Stop Me Now</div>
+                  </div>
+                  <div class="item-subtitle">Queen</div>
+                </div></a></li>
+            <li><a href="#" class="item-link item-content">
+                <div class="item-media"><img src="http://lorempixel.com/88/88/people/3" width="44"></div>
+                <div class="item-inner">
+                  <div class="item-title-row">
+                    <div class="item-title">Billie Jean</div>
+                  </div>
+                  <div class="item-subtitle">Michael Jackson</div>
+                </div></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- 底部选项卡位置 -->
+    <div class="picker-modal picker-modal-demo">
+      <div class="toolbar">
+        <div class="toolbar-inner">
+          <div class="left"></div>
+          <div class="right"><a href="#" class="link close-picker">Done</a></div>
+        </div>
+      </div>
+      <div class="picker-modal-inner">
+        <div class="content-block">
+          <p>Integer mollis nulla id nibh elementum finibus. Maecenas eget fermentum ipsum. Sed sagittis condimentum nisl at tempus. Duis lacus</p>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="js/framework7.js"></script>
+    <script type="text/javascript" src="js/kitchen-sink.js"></script>
+  </body>
+</html>
