@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>transtion</title>
+    <style>
+        *{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<!--过度按钮-->
+<button class="btn hover">按钮</button>
+<button class="btn trans">按钮</button>
+<style>
+    .btn{
+        border: none;
+        padding: 0;
+        width: 50px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 6px;
+        background: #01bb54;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        box-shadow: none;
+    }
+    .hover:hover{
+        background: #019241;
+
+    }
+    .trans{
+        transition: all .3s ease;
+    }
+    .trans:hover{
+        background: #019241;
+
+    }
+</style>
+
+
+
+
+<!--过度下拉菜单-->
+<div>
+  <ul class="titleBox">
+      <li>
+          <a href="#">首页</a>
+          <ul>
+              <li>首页1</li>
+              <li>首页2</li>
+              <li>首页3</li>
+          </ul>
+      </li>
+      <li>
+          <a href="#">活动</a>
+          <ul>
+              <li>活动1</li>
+              <li>活动2</li>
+              <li>活动3</li>
+          </ul>
+      </li>
+  </ul>
+<style>
+  .titleBox>li{
+      position: relative;
+      display: inline-block;
+      width: 100px;
+      border: 1px solid red;
+      text-align: center;
+  }
+  .titleBox>li>ul{       /*前*/
+      position: absolute;
+      transform: scaleY(0);
+  }
+  .titleBox ul{  /*设置渐变*/
+      transform-origin: 0 0;
+      transition: all .5s;
+  }
+  .titleBox>li:hover ul{  /*后*/
+      transform: scaleY(1);
+  }
+</style>
+</div>
+</body>
+</html>

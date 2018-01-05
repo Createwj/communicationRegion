@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <title>Title</title>
+    <script src="http://echarts.baidu.com/dist/echarts.js"></script>
+    <script src="http://echarts.baidu.com/asset/theme/dark.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+<div id="biao" style="width: 600px;height: 400px"></div>
+<script>
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'), 'dark');  // 初始化实例
+
+    // 指定图表的配置项和数据
+    option = {
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {  // 鼠标移动上去之后显示数据信息提示文字
+            data:['最高','最低']
+        },
+        toolbox: { // 统计图小工具 设置
+            show : true,
+            orient: 'vertical',      // 布局方式，默认为水平布局，可选为：
+                                       // 'horizontal' ¦ 'vertical'
+            x: 'right',                // 水平安放位置，默认为全图右对齐，可选为：
+                                       // 'center' ¦ 'left' ¦ 'right'
+                                       // ¦ {number}（x坐标，单位px）
+            y: 'top',                  // 垂直安放位置，默认为全图顶端，可选为：
+                                       // 'top' ¦ 'bottom' ¦ 'center'
+                                       // ¦ {number}（y坐标，单位px）
+            color : ['#1e90ff','#22bb22','#4b0082','#d2691e'],
+            backgroundColor: 'rgba(0,0,0,0)', // 工具箱背景颜色
+            borderColor: '#ccc',       // 工具箱边框颜色
+            borderWidth: 0,            // 工具箱边框线宽，单位px，默认为0（无边框）
+            padding: 5,                // 工具箱内边距，单位px，默认各方向内边距为5，
+            showTitle: true,
+            feature : {   // 侧边栏工具设置
+                mark : {
+                    show : true,
+                    title : {
+                        mark : '辅助线-开关',
+                        markUndo : '辅助线-删除',
+                        markClear : '辅助线-清空'
+                    },
+                    lineStyle : {
+                        width : 1,
+                        color : '#1e90ff',
+                        type : 'dashed'
+                    }
+                },
+                dataZoom : {
+                    show : true,
+                    title : {
+                        dataZoom : '区域缩放',
+                        dataZoomReset : '区域缩放-后退'
+                    }
+                },
+                dataView : { // 数据
+                    show : true,
+                    title : '数据视图',
+                    readOnly: true,
+                    lang : ['数据视图', '关闭', '刷新'],
+                    optionToContent: function(opt) {
+                        console.log(opt)
+                        var axisData = opt.xAxis[0].data;
+                        var series = opt.series;
+                        var table = '<table style="width:100%;text-align:center"><tbody><tr>'
+                            + '<td>时间</td>'
+                            + '<td>' + series[0].name + '</td>'
+                            + '<td>' + series[1].name + '</td>'
+                            + '</tr>';
+                        for (var i = 0, l = axisData.length; i < l; i++) {
+                            table += '<tr>'
+                                + '<td>' + axisData[i] + '</td>'
+                                + '<td>' + series[0].data[i] + '</td>'
+                                + '<td>' + series[1].data[i] + '</td>'
+                                + '</tr>';
+                        }
+                        table += '</tbody></table>';
+                        return table;
+                    }
+                },
+                magicType: {
+                    show : true,
+                    title : {
+                        line : '动态类型切换-折线图',
+                        bar : '动态类型切换-柱形图',
+                        stack : '动态类型切换-堆积',
+                        tiled : '动态类型切换-平铺'
+                    },
+                    type : ['line', 'bar', 'stack', 'tiled']
+                },
+                restore : {
+                    show : true,
+                    title : '还原',
+                    color : 'black'
+                },
+                saveAsImage : {
+                    show : true,
+                    title : '保存为图片',
+                    type : 'jpeg',
+                    lang : ['点击本地保存']
+                },
+                myTool : {
+                    show : true,
+                    title : '自定义扩展方法',
+                    icon : 'image://../asset/ico/favicon.png',
+                    onclick : function (){
+                        alert('myToolHandler')
+                    }
+                }
+            }
+        },
+        calculable : true,
+        dataZoom : {  // 时间范围
+            show : false
+//            realtime : true,
+//            start : 20,
+//            end : 80
+        },
+        xAxis : [  // 时间 2017-03-01   2017-03-31
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : function (){
+                    var list = [];
+                    for (var i = 1; i <= 30; i++) {
+                        list.push('2013-03-' + i);
+                    }
+//                    console.log(list)
+                    return list;
+                }()
+            }
+        ], // X轴时间显示
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],  // Y轴时间显示
+        series : [  // 随机生成的数据 后台请求到的数据
+            {
+                name:'最高',
+                type:'line',
+                data:function (){ // 后台请求到的数据
+                    var list = [];
+                    for (var i = 1; i <= 30; i++) {
+                        list.push(Math.round(Math.random()* 30));
+                    }
+                    return list;
+                }()
+            },
+            {
+                name:'最低',
+                type:'line',
+                data:function (){  //后台请求到的数据
+                    var list = [];
+                    for (var i = 1; i <= 30; i++) {
+                        list.push(Math.round(Math.random()* 10));
+                    }
+                    return list;
+                }()
+            }
+        ] // 后台请求到的数据
+    };
+    myChart.setOption(option); // 将数据插进去到Chart实例中
+</script>
+<script>
+    var myChart = echarts.init(document.getElementById('biao'), 'dark');
+    option = {
+        backgroundColor: '#1b1b1b',
+        tooltip : {
+            formatter: "{a} <br/>{c} {b}"
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                mark : {show: true},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        series : [
+            {
+                name:'速度',
+                type:'gauge',
+                min:0,
+                max:220,
+                splitNumber:11,
+                radius: '50%',
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.09, 'lime'],[0.82, '#1e90ff'],[1, '#ff4500']],
+                        width: 3,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :15,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :25,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {           // 分隔线
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontSize: 20,
+                        fontStyle: 'italic',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail : {
+                    backgroundColor: 'rgba(30,144,255,0.8)',
+                    borderWidth: 1,
+                    borderColor: '#fff',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5,
+                    offsetCenter: [0, '50%'],       // x, y，单位px
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        color: '#fff'
+                    }
+                },
+                data:[{value: 40, name: 'km/h'}]
+            },
+            {
+                name:'转速',
+                type:'gauge',
+                center : ['25%', '55%'],    // 默认全局居中 显示数字位置
+                radius : '30%',
+                min:0,
+                max:7,
+                endAngle:45,
+                splitNumber:7,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.29, 'lime'],[0.86, '#1e90ff'],[1, '#ff4500']],
+                        width: 2,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {            // 坐标轴小标记
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :12,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :20,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {
+                    width:5,
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    offsetCenter: [0, '-30%'],       // x, y，单位px
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontStyle: 'italic',
+                        offsetCenter:['-20%', '-40%'],
+                        padding:30,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                detail : {
+                    //backgroundColor: 'rgba(30,144,255,0.8)',
+                    // borderWidth: 1,
+                    borderColor: '#fff',
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5,
+                    width: 80,
+                    height:30,
+                    fontSize: 15,
+                    offsetCenter: [10, '30%'],       // x, y，单位px
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        color: '#fff'
+                    }
+                },
+                data:[{value: 1.5, name: 'x1000 r/min'}]
+            },
+            {
+                name:'油表',
+                type:'gauge',
+                center : ['75%', '50%'],    // 默认全局居中
+                radius : '30%',
+                min:0,
+                max:2,
+                startAngle:135,
+                endAngle:45,
+                splitNumber:2,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.2, 'lime'],[0.8, '#1e90ff'],[1, '#ff4500']],
+                        width: 2,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length :12,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisLabel: {
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    },
+                    formatter:function(v){
+                        switch (v + '') {
+                            case '0' : return 'E';
+                            case '1' : return 'Gas';
+                            case '2' : return 'F';
+                        }
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {
+                    width:2,
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    show: false
+                },
+                detail : {
+                    show: false
+                },
+                data:[{value: 0.5, name: 'gas'}]
+            },
+            {
+                name:'水表',
+                type:'gauge',
+                center : ['75%', '50%'],    // 默认全局居中
+                radius : '30%',
+                min:0,
+                max:2,
+                startAngle:315,
+                endAngle:225,
+                splitNumber:2,  // 分隔几段
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: [[0.2, 'lime'],[0.8, '#1e90ff'],[1, '#ff4500']],
+                        width: 2,
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    show: false
+                },
+                axisLabel: {
+                    textStyle: {       // 属性lineStyle控制线条样式
+                        fontWeight: 'bolder',
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    },
+                    formatter:function(v){
+                        switch (v + '') {
+                            case '0' : return 'H';
+                            case '1' : return 'Water';
+                            case '2' : return 'C';
+                        }
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length :15,         // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        width:3,
+                        color: '#fff',
+                        shadowColor : '#fff', //默认透明
+                        shadowBlur: 10
+                    }
+                },
+                pointer: {
+                    width:2,
+                    shadowColor : '#fff', //默认透明
+                    shadowBlur: 5
+                },
+                title : {
+                    show: false
+                },
+                detail : {
+                    show: false
+                },
+                data:[{value: 0.5, name: 'gas'}]
+            }
+        ]
+    };
+
+    setInterval(function (){
+        option.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
+        option.series[1].data[0].value = (Math.random()*7).toFixed(2) - 0;
+        option.series[2].data[0].value = (Math.random()*2).toFixed(2) - 0;
+        option.series[3].data[0].value = (Math.random()* 2).toFixed(2) - 0;
+        myChart.setOption(option);
+    },2000)
+</script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <title>折线</title>
+    <script src="./echarts/echarts.js"></script>
+    <script src="./echarts/dark.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px"></div>
+<script>
+    var myChart = echarts.init(document.getElementById('main'), 'dark');
+
+    option = {
+        title: {
+            text: '泊位实时利用率',
+            textStyle: {
+                color: '#FFFFFF',
+                align: 'left',
+            },
+            top: 15,
+            left: 10,
+            subtext: '0(个)',
+            subtextStyle: {
+                fontSize:14,
+                color: '#12fa84',
+                lineHeight: 15
+            }
+        },
+        tooltip: {
+            show: false,
+        },
+        legend: {
+            show: false,
+        },
+        grid: {
+            button: 0
+        },
+        series: [
+            {
+                name: '访问来源',
+                type: 'pie',
+                legendHoverLink: false,
+                hoverAnimation: false,
+                stillShowZeroSum: false,
+                radius: ['30%', '60%'],
+                avoidLabelOverlap: false,
+                center: ['50%', '60%'],
+                label: {
+                    normal: {
+                        show: false
+                    }
+                },
+                markPoint: {
+                    data: [
+                        {
+                            value: 123,
+                            name: '占用',
+                            percent: (100 / 43 * 100).toFixed(1),
+                            x: '82%',
+                            y: '70%'
+                        }, {
+                            value: 12,
+                            name: '空闲',
+                            percent: (3 / 31 * 100).toFixed(1),
+                            x: '20%',
+                            y: '90%',
+                            label: {
+                                normal: {
+                                    align: 'right'
+                                }
+                            }
+                        }
+                    ],
+                    symbolSize: 1,
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'outside',
+                            formatter: function (params) {
+                                if (params.data.percent === 'NaN') {
+                                    params.data.percent = 0.0
+                                }
+                                if (params.data.name === '占用') {
+                                    return [
+                                        '{inDian| }',
+                                        '{in|' + params.data.name + '}',
+                                        '{in|' + params.data.value + '}',
+                                        '{in|' + params.data.percent + '%}'
+                                    ].join('\n')
+                                } else if (params.data.name === '空闲') {
+                                    return [
+                                        '{outDian| }',
+                                        '{out|' + params.data.name + '}',
+                                        '{out|' + params.data.value + '}',
+                                        '{out|' + params.data.percent + '%}'
+                                    ].join('\n')
+                                }
+                            },
+                            lineHeight: 18,
+                            rich: {
+                                inDian: {
+                                    backgroundColor: {
+                                        image: '../../image/lvse.png'
+                                    },
+                                    width: 8,
+                                    height: 9
+                                },
+                                in: {
+                                    color: '#12fa84',
+                                    fontSize:14
+                                },
+                                outDian: {
+                                    backgroundColor: {
+                                        image: '../../image/lvsekong.png'
+                                    },
+                                    width: 8,
+                                    height: 9
+                                },
+                                out: {
+                                    color: '#FFFFFF',
+                                    fontSize:14
+                                }
+                            }
+                        },
+                        emphasis: {
+                            show: true,
+                            position: 'outside'
+                        }
+                    }
+
+                },
+                labelLine: {
+                    normal: {
+                        show: false
+                    }
+                },
+                data: [
+                    {
+                        value: 123,
+                        name: '占用',
+                        itemStyle: {
+                            normal: {
+                                color: '#12fa84'
+                            }
+                        }
+                    },
+                    {
+                        value: 12,
+                        name: '空闲',
+                        itemStyle: {
+                            normal: {
+                                color: '#055957'
+                            }
+                        }
+                    },
+                ]
+            }
+        ]
+    };
+    myChart.setOption(option);
+</script>
+<script>
+//    var option = {
+//        title: {
+//            text: '泊位实时利用率',
+//            textStyle: {
+//                color: '#FFFFFF',
+//                align: 'left',
+//            },
+//            top: 15,
+//            left: 10,
+//            subtext: all + '(个)',
+//            subtextStyle: {
+//                fontSize:14,
+//                color: '#12fa84',
+//                lineHeight: 15
+//            }
+//        },
+//        tooltip: {
+//            show: false,
+//        },
+//        legend: {
+//            show: false,
+//        },
+//        grid: {
+//            button: 0
+//        },
+//        series: [
+//            {
+//                name: '访问来源',
+//                type: 'pie',
+//                legendHoverLink: false,
+//                hoverAnimation: false,
+//                stillShowZeroSum: false,
+//                radius: ['30%', '60%'],
+//                avoidLabelOverlap: false,
+//                center: ['50%', '60%'],
+//                label: {
+//                    normal: {
+//                        show: false
+//                    }
+//                },
+//                markPoint: {
+//                    data: [
+//                        {
+//                            value: occupancy,
+//                            name: '占用',
+//                            percent: (occupancy / all * 100).toFixed(1),
+//                            x: '82%',
+//                            y: '70%'
+//                        }, {
+//                            value: idle,
+//                            name: '空闲',
+//                            percent: (idle / all * 100).toFixed(1),
+//                            x: '20%',
+//                            y: '90%',
+//                            label: {
+//                                normal: {
+//                                    align: 'right'
+//                                }
+//                            }
+//                        }
+//                    ],
+//                    symbolSize: 1,
+//                    label: {
+//                        normal: {
+//                            show: true,
+//                            position: 'outside',
+//                            formatter: function (params) {
+//                                if (params.data.percent === 'NaN') {
+//                                    params.data.percent = 0.0
+//                                }
+//                                if (params.data.name === '占用') {
+//                                    return [
+//                                        '{inDian| }',
+//                                        '{in|' + params.data.name + '}',
+//                                        '{in|' + params.data.value + '}',
+//                                        '{in|' + params.data.percent + '%}'
+//                                    ].join('\n')
+//                                } else if (params.data.name === '空闲') {
+//                                    return [
+//                                        '{outDian| }',
+//                                        '{out|' + params.data.name + '}',
+//                                        '{out|' + params.data.value + '}',
+//                                        '{out|' + params.data.percent + '%}'
+//                                    ].join('\n')
+//                                }
+//                            },
+//                            lineHeight: 18,
+//                            rich: {
+//                                inDian: {
+//                                    backgroundColor: {
+//                                        image: '../../images/screenShow/lvse.png'
+//                                    },
+//                                    width: 8,
+//                                    height: 9
+//                                },
+//                                in: {
+//                                    color: '#12fa84',
+//                                    fontSize:14
+//                                },
+//                                outDian: {
+//                                    backgroundColor: {
+//                                        image: '../../images/screenShow/lvsekong.png'
+//                                    },
+//                                    width: 8,
+//                                    height: 9
+//                                },
+//                                out: {
+//                                    color: '#FFFFFF',
+//                                    fontSize:14
+//                                }
+//                            }
+//                        },
+//                        emphasis: {
+//                            show: true,
+//                            position: 'outside'
+//                        }
+//                    }
+//
+//                },
+//                labelLine: {
+//                    normal: {
+//                        show: false
+//                    }
+//                },
+//                data: [
+//                    {
+//                        value: occupancy,
+//                        name: '占用',
+//                        itemStyle: {
+//                            normal: {
+//                                color: '#12fa84'
+//                            }
+//                        }
+//                    },
+//                    {
+//                        value: idle,
+//                        name: '空闲',
+//                        itemStyle: {
+//                            normal: {
+//                                color: '#055957'
+//                            }
+//                        }
+//                    },
+//                ]
+//            }
+//        ]
+//    };
+//    mapChart.setOption(option);
+</script>
+</body>
+</html>

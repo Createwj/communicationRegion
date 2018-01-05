@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>example</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/html2canvas.min.js"></script>
+</head>
+<script type="text/javascript">
+    function takeScreenshot() {
+//        $('#view').show()
+        console.log('test');
+        html2canvas(document.getElementById('view'), {
+            onrendered: function(canvas) {
+               $('#png').html(canvas);
+            },
+             width: 500,
+             height: 300
+        });
+//        $('#view').hide()
+    }
+</script>
+<body>
+<div id="view">
+    <div class="font name">张三</div>
+    <div class="font num" >123456</div>
+    <div class="font com">优先科技</div>
+    <div class="font tel">12345678901</div>
+    <img class="avatar" src="./img/default.png">
+</div>
+<input type="button" value="生成照片" onclick="takeScreenshot()">
+<div id="png"></div>
+<style>
+    #view{
+        position: relative;
+        background:url('./img/gly.jpg') 50%;
+        background-size: 100%;
+        width: 500px;
+        height: 300px;
+        margin: 0 auto;
+    }
+    #png{
+        margin: 0 auto;
+        text-align: center;
+    }
+    .avatar{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        width: 115px;
+        height: 138px;
+    }
+    .font{
+        color: #333;
+        font-weight: 600;
+        position: absolute;
+        left: 122px;
+        width: 40%;
+        text-align: center;
+    }
+    .name{
+        top:121px;
+
+    }
+    .num{
+        top:165px;
+    }
+    .com{
+        top:205px;
+    }
+    .tel{
+        top:251px;
+
+    }
+</style>
+</body>
+</html>

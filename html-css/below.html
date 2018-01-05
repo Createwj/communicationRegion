@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>下倒影</p>
+<p class="reflect-bottom-p"><img src="test.jpg" class="reflect-bottom"></p>
+
+<style>
+    .reflect-bottom-p {
+        padding-bottom: 300px;
+    }
+
+    .reflect-bottom {
+        /*-webkit-box-reflect: below;*/  /*渐变*/
+        -webkit-box-reflect: below 0 linear-gradient(transparent, white);
+    }
+    .reflect-right-translate {  /*右边倒影*/
+        -webkit-box-reflect: right 10px;
+    }
+</style>
+
+
+<p>原图</p>
+<img src="test.jpg" />
+<p>黑白色filter: grayscale(100%)</p>
+<img src="test.jpg" style="filter: grayscale(100%);"/>
+<p>褐色filter:sepia(1)</p>
+<img src="test.jpg" style="filter:sepia(1);"/>
+<p>饱和度saturate(2)</p>
+<img src="test.jpg" style="filter:saturate(2);"/>
+<p>色相旋转hue-rotate(90deg)</p>
+<img src="test.jpg" style="filter:hue-rotate(90deg);"/>
+<p>反色filter:invert(1)</p>
+<img src="test.jpg" style="filter:invert(1);"/>
+<p>透明度opacity(.5)</p>
+<img src="test.jpg" style="filter:opacity(.5);"/>
+<p>亮度brightness(.5)</p>
+<img src="test.jpg" style="filter:brightness(.5);"/>
+<p>对比度contrast(2)</p>
+<img src="test.jpg" style="filter:contrast(2);"/>
+<p>模糊blur(3px)</p>
+<img src="test.jpg" style="filter:blur(3px);"/>
+<p>阴影drop-shadow(5px 5px 5px #000)</p>
+<img src="test.jpg" style="filter:drop-shadow(5px 5px 5px #000);"/>
+
+</body>
+</html>

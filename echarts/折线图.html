@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+    <title>折线</title>
+    <script src="./echarts/echarts.js"></script>
+    <script src="./echarts/dark.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px"></div>
+<script>
+    var myChart = echarts.init(document.getElementById('main'), 'dark');  // 初始化实例
+    option = {
+        tooltip : {  // 鼠标移动上去之后显示信息
+            trigger: 'axis'
+        },
+        toolbox: {
+            show : true,  // 是否显示哦工具栏   间隔 字体大小  显示信息 显示图片  自定义功能回调函数
+            orient: 'horizontal',  //显示方式 // 'horizontal' ¦ 'vertical'
+            feature : {  // 各工具配置项   ----》 手册
+                mark : {show: true},
+                restore : {show: true},  // 还原
+                saveAsImage : {show: true},  // 下载图片
+                magicType: {
+                    show : true,
+                    title : {
+                        line : '动态类型切换-折线图',
+                        bar : '动态类型切换-柱形图',
+                        stack : '动态类型切换-堆积'
+                    },
+                    type : ['line', 'bar','stack']
+                }
+            }
+        },
+        legend: {  // 各个数据之间的切换
+            data:['最高','最低']
+        },
+        series: [  // 后台请求到的数据
+            {
+                name:'最高',
+                type:'line',
+                itemStyle: {
+                  normal: {
+                    lineStyle: {
+                      color: '#0000ff'
+                    }
+                  }
+                },
+                data:function (){ // 后台请求到的数据
+                    var list = [];
+                    for (var i = 1; i <= 30; i++) {
+                        list.push(Math.round(Math.random()* 30));
+                    }
+                    return list;
+                }()
+            },
+            {
+                name:'最低',
+                type:'line',
+                itemStyle: {
+                    normal: {
+                        lineStyle: {
+                            color: '#ff0000'
+                        }
+                    }
+                },
+                data:function (){  //后台请求到的数据
+                    var list = [];
+                    for (var i = 1; i <= 30; i++) {
+                        list.push(Math.round(Math.random()* 10));
+                    }
+                    return list;
+                }()
+            }
+        ], // 数据
+        xAxis : [  // 时间 2017-03-01   2017-03-31
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : function (){
+                    var list = [];
+                    for (var i = 1; i <= 30; i++) {
+                        list.push('2013-03-' + i);
+                    }
+                    return list;
+                }()
+            }
+        ], // X轴
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ]  // Y 轴
+    }
+    myChart.setOption(option);
+</script>
+</body>
+</html>

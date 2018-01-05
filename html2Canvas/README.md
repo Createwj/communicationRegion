@@ -1,0 +1,1 @@
+[点击打开查看浏览器是否支持该插件](http://deerface.sinaapp.com/)

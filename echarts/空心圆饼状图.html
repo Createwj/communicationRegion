@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <title>空心圆饼</title>
+    <script src="./echarts/echarts.js"></script>
+    <script src="./echarts/dark.js"></script>
+</head>
+<body>
+<div id="main" style="width: 600px;height: 400px"></div>
+<script>
+    var myChart = echarts.init(document.getElementById('main'), 'dark');  // 初始化实例
+    var scale = 1;
+    var echartData = [{   // 后台传送数据
+        value: 2154,
+        name: '曲阜师范大学'
+    }, {
+        value: 3854,
+        name: '潍坊学院'
+    }, {
+        value: 3515,
+        name: '青岛职业技术学院'
+    }, {
+        value: 3515,
+        name: '淄博师范高等专科'
+    }, {
+        value: 3854,
+        name: '鲁东大学'
+    }, {
+        value: 2154,
+        name: '山东师范大学'
+    }]
+    var rich = {
+        yellow: {
+            color: "#ffc72b",    // 各个大学考生数样式
+            fontSize: 30 * scale,
+            padding: [-10, 4],
+            align: 'center'
+        },
+        total: {
+            color: "#ffc72b",   // 总考生数样式
+            fontSize: 40 * scale,
+            align: 'center'
+        },
+        white: {
+            color: "#fff",      //  大学字体样式
+            align: 'center',
+            fontSize: 14 * scale,
+            padding: [21, 0]
+        },
+        blue: {
+            color: '#49dff0',  // 百分比样式
+            fontSize: 16 * scale,
+            align: 'center'
+        },
+        hr: {
+            borderColor: '#0b5263',  // 横线样式
+            width: '100%',
+            borderWidth: 1,
+            height: 0,
+        }
+    }
+    option = {
+        backgroundColor: '#031f2d',
+        title: {
+            text:'总考生数',        // title样式
+            left:'center',
+            top:'53%',
+            padding:[14,0],
+            textStyle:{
+                color:'#fff',
+                fontSize:18*scale,
+                align:'center'
+            }
+        },
+        legend: {
+            selectedMode:false,
+            formatter: function(name) {
+                var total = 0; //各科正确率总和
+                var averagePercent; //综合正确率
+                echartData.forEach(function(value, index, array) {
+                    total += value.value;
+                });
+                return '{total|' + total + '}';
+            },
+            data: [echartData[0].name],
+            // data: ['高等教育学'],
+            // itemGap: 50,
+            left: 'center',
+            top: 'center',
+            icon: 'none',
+            align:'center',
+            textStyle: {
+                color: "#fff",
+                fontSize: 16 * scale,
+                rich: rich
+            },
+        },
+        series: [{
+            name: '总考生数量',
+            type: 'pie',
+            radius: ['33%', '50%'],  // 环的粗细
+            hoverAnimation: true,
+            color: ['#c487ee', '#deb140', '#49dff0', '#034079', '#6f81da', '#00ffb4'],
+            label: {
+                normal: {
+                    formatter: function(params, ticket, callback) {
+                        var total = 0; //考生总数量
+                        var percent = 0; //考生占比
+                        echartData.forEach(function(value, index, array) {
+                            total += value.value;
+                        });
+                        percent = ((params.value / total) * 100).toFixed(1);
+                        return '{white|' + params.name + '}\n{hr|}\n{yellow|' + params.value + '}\n{blue|' + percent + '%}';
+                    },
+                    rich: rich
+                },
+            },
+            labelLine: {  // 线的长短
+                normal: {
+                    length: 44 * scale,
+                    length2: 0,
+                    lineStyle: {
+                        color: '#0b5263'
+                    }
+                }
+            },
+            data: echartData   // 渲染需要的数据
+        }]
+    };
+    myChart.setOption(option)
+</script>
+</body>
+</html>
