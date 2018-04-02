@@ -1,3 +1,6 @@
+### js 陀螺仪检测 demo
+http://116.62.168.126/pages/frame.htm 点击此处访问
+
 # scope
 
 > A Vue.js project
